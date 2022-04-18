@@ -2,6 +2,7 @@ package com.mile.elasticjdk17toy.domain;
 
 import com.mile.elasticjdk17toy.domain.embed.BasicProfile;
 import lombok.Data;
+import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
@@ -16,4 +17,29 @@ public class User {
 
     @Embedded
     private BasicProfile basicProfile;
+
+    protected User() {
+    }
+
+    public User(String name) {
+        this(name, null);
+    }
+
+    public User(String name, String description) {
+        this(null, new BasicProfile(name, description));
+    }
+
+    @PersistenceConstructor
+    public User(Long id, BasicProfile basicProfile) {
+        this.id = id;
+        this.basicProfile = basicProfile;
+    }
+
+    public String getName() {
+        return basicProfile.getName();
+    }
+
+    public String getDescription() {
+        return basicProfile.getDescription();
+    }
 }
