@@ -8,7 +8,11 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @EnableJpaAuditing
 @Configuration
-@EnableJpaRepositories(basePackages = "com.mile.elasticjdk17toy.repository.rdb")
-@ComponentScan(basePackages = "com.mile.elasticjdk17toy.service.rdb")
+@EnableJpaRepositories(
+        basePackages = "com.mile.elasticjdk17toy.repository.rdb",
+        excludeFilters = @ComponentScan.Filter(
+        type = FilterType.REGEX,
+        pattern = "com.mile.elasticjdk17toy.repository.es.*")
+)
 public class JpaConfig {
 }

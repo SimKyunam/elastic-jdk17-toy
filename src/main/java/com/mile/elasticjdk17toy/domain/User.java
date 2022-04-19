@@ -1,6 +1,7 @@
 package com.mile.elasticjdk17toy.domain;
 
 import com.mile.elasticjdk17toy.domain.embed.BasicProfile;
+import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -11,6 +12,7 @@ import java.lang.annotation.Documented;
 @Document(indexName = "users")
 @Entity
 @Data
+@Builder
 public class User {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
