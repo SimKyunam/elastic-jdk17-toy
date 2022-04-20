@@ -20,7 +20,7 @@ class UserSearchRepositoryTest {
     UserSearchRepository userSearchRepository;
 
     @Test
-    public void 사용자_생성() {
+    void 사용자_생성() {
         User user = UserHelper.makeUser(1L, "홍길동", "홍길동 사람");
         User user1 = UserHelper.makeUser(2L, "이순신", "이순신 사람");
         User user2 = UserHelper.makeUser(3L, "강감찬", "강감찬 사람");
@@ -36,5 +36,17 @@ class UserSearchRepositoryTest {
                 .collect(Collectors.toList());
 
         assertEquals(4, userList.size());
+    }
+
+    @Test
+    void 사용자_조회() {
+        User user = UserHelper.makeUser(1L, "홍길동", "홍길동 사람");
+        userSearchRepository.save(user);
+
+        User selectUser = userSearchRepository.findById(1L)
+                .orElseThrow(() -> new RuntimeException("결과 없습니다."));
+
+        assertEquals(user.getId(), selectUser.getId());
+        assertEquals(user.getName(), selectUser.getName());
     }
 }
