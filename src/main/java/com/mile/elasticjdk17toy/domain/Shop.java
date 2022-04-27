@@ -26,5 +26,5 @@ public class Shop {
     @Embedded
     private BasicShop basicShop;
 
-    private BusinessType type;
+    private BusinessType businessType;
 }
