@@ -113,8 +113,13 @@ class ShopSearchRepositoryTest {
                 .businessType(BusinessType.FOOD)
                 .build();
 
+        shopSearchRepository.save(shop1);
+        shopSearchRepository.save(shop2);
+        shopSearchRepository.save(shop3);
+        shopSearchRepository.save(shop4);
+        shopSearchRepository.save(shop5);
 
-        shopSearchRepository.findByName("홍콩")
+        shopSearchRepository.findByName("홍콩짬뽕")
                 .stream()
                 .peek(System.out::println);
     }
