@@ -21,6 +21,16 @@ public class CustomUserSearchRepositoryImpl implements CustomUserSearchRepositor
     private final ElasticsearchOperations elasticsearchOperations;
 
     @Override
+    public List<User> searchByName(String name) {
+        Criteria criteria = Criteria.where("basicProfile.name").contains(name);
+        Query query = new CriteriaQuery(criteria);
+        SearchHits<User> search = elasticsearchOperations.search(query, User.class);
+        return search.stream()
+                .map(SearchHit::getContent)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<User> searchByName(String name, Pageable pageable) {
         Criteria criteria = Criteria.where("basicProfile.name").contains(name);
         Query query = new CriteriaQuery(criteria).setPageable(pageable);

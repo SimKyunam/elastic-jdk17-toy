@@ -49,4 +49,23 @@ class UserSearchRepositoryTest {
         assertEquals(user.getId(), selectUser.getId());
         assertEquals(user.getName(), selectUser.getName());
     }
+
+    @Test
+    void 사용자_이름_조회() {
+        User user1 = UserHelper.makeUser(1L, "홍길동", "홍길동 사람");
+        User user2 = UserHelper.makeUser(2L, "강감찬", "강감찬 사람");
+        User user3 = UserHelper.makeUser(3L, "홍동연", "홍동연 사람");
+        User user4 = UserHelper.makeUser(4L, "홍민우", "홍민우 사람");
+        User user5 = UserHelper.makeUser(5L, "홍준동", "홍준동 사람");
+        User user6 = UserHelper.makeUser(6L, "홍동한", "홍동한 사람");
+
+        userSearchRepository.save(user1);
+        userSearchRepository.save(user2);
+        userSearchRepository.save(user3);
+        userSearchRepository.save(user4);
+        userSearchRepository.save(user5);
+        userSearchRepository.save(user6);
+
+        userSearchRepository.searchByName("홍동").forEach(System.out::println);
+    }
 }
